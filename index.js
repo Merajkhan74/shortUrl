@@ -11,6 +11,7 @@ const userRouter = require("./router/user")
 const staticRouter = require("./router/staticRouter")
 const app = express()
 
+require("dotenv").config(); 
 app.set("view engine" , "ejs")
 app.set("views" , path.resolve("./views"))
 
@@ -47,12 +48,13 @@ app.get("/logout", (req, res) => {
 });
 
 
-try {
-    connectedToMongoDb("mongodb://127.0.0.1:27017/shortUrl")
-    console.log("Mongoose DB connected ")
-} catch (error) {
-    console.log("Mongoose DB Connection fail ", error)
-}
+connectedToMongoDb(process.env.MONGODB_URI)
+    .then(() => {
+        console.log("Mongoose DB connected");
+    })
+    .catch((error) => {
+        console.log("Mongoose DB Connection fail", error);
+    });
 
 
 app.use("/url",restrictTo(["NORMAL", "ADMIN"]), urlRouter);
