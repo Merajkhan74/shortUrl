@@ -18,21 +18,23 @@ async function handleCreateUserSignUp(req, res) {
         .send("Email Already Exits ..")
     }
 }
-async function handleUserLogin (req, res) {
-    const {email, password} = req.body;
-    const user = await User.findOne({ email, password})
-    if(!user){
-        return res.render("login",{
-            error : "Invalid email and password"
-        })
+async function handleUserLogin(req, res) {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email, password });
+
+    if (!user) {
+        return res.render("login", {
+            error: "Invalid email or password"
+        });
     }
 
+    const token = setUser(user);
 
-    const token = setUser(  user)
-    res.cookie("token",token)
-    return res.redirect("/")
+    res.cookie("token", token);
+
+    return res.redirect("/");
 }
-
 module.exports = {
     handleCreateUserSignUp,
     handleUserLogin,

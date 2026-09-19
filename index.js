@@ -1,3 +1,4 @@
+require("dotenv").config(); 
 const express = require("express")
 const path = require("path")
 const session = require("express-session");
@@ -11,7 +12,6 @@ const userRouter = require("./router/user")
 const staticRouter = require("./router/staticRouter")
 const app = express()
 
-require("dotenv").config(); 
 app.set("view engine" , "ejs")
 app.set("views" , path.resolve("./views"))
 
