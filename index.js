@@ -51,9 +51,13 @@ app.get("/logout", (req, res) => {
 connectedToMongoDb(process.env.MONGODB_URI)
     .then(() => {
         console.log("Mongoose DB connected");
+            app.listen(PORT, () => {
+            console.log(` Server is running on port ${PORT}`);
+        });
     })
     .catch((error) => {
         console.log("Mongoose DB Connection fail", error);
+          process.exit(1);
     });
 
 
@@ -86,6 +90,3 @@ app.get("/:ShortId", async (req, res) => {
     return res.redirect(Entry.redirectUrl);
 });
 
-app.listen(PORT, ()=>{
-    console.log(`server is running ${PORT}`)
-})
