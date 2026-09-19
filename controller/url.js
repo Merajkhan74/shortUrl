@@ -3,7 +3,7 @@ const Url = require("../model/url");
 
 async function handleGenerateNewUrl(req, res) {
     const body = req.body || {};
-    console.log("USER:", req.user ,);
+
     
     if (!body.url) {
         return res.status(400).json("URL is required");
