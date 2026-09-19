@@ -17,7 +17,7 @@ const {getUser , setUser } = require("../service/auth")
     
     function restrictTo(roles = []) {
         return function(req, res, next) {
-        console.log("USER:", req.user);
+        // console.log("USER:", req.user);
 
         if (!req.user) {
             return res.redirect("/login");
